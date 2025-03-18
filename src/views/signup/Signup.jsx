@@ -1,11 +1,52 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import signUpLogo from "../../assets/images/logo/c.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Signup() {
   const [showCreatePassword, setShowCreatePassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    // Clear any previous errors
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "https://cyber-craft-backend.vercel.app/api/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+
+      // On successful sign-up, redirect to login
+
+      navigate("/signin"); // Redirect to sign-in page
+    } catch (err) {
+      setError("Error signing up. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -27,6 +68,8 @@ export default function Signup() {
               <input
                 type="text"
                 id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Your Full Name"
                 className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px]"
               />
@@ -38,6 +81,8 @@ export default function Signup() {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px]"
               />
@@ -50,6 +95,8 @@ export default function Signup() {
                 <input
                   type={showCreatePassword ? "text" : "password"}
                   id="createPassword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Must be 8 characters"
                   className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px] pr-10"
                 />
@@ -74,6 +121,8 @@ export default function Signup() {
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Repeat Password"
                   className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px] pr-10"
                 />
@@ -91,10 +140,17 @@ export default function Signup() {
               </div>
             </div>
 
+            {/* Error message */}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
+
             {/* Submit Button */}
             <div className="mt-5">
-              <button className="w-full h-[56px] bg-blue-600 text-white rounded-[10px] hover:bg-blue-700 transition">
-                Create Account
+              <button
+                onClick={handleSubmit}
+                className="w-full h-[56px] bg-blue-600 text-white rounded-[10px] hover:bg-blue-700 transition"
+                disabled={loading}
+              >
+                {loading ? "Creating Account..." : "Create Account"}
               </button>
             </div>
 

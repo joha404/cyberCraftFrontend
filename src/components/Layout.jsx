@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SideNav from "../components/Navbar/SideNav";
 import NavBar from "../components/Navbar/NavbarPage";
 import DashBoard from "../views/Dashboard";
 
 export default function Layout() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      navigate("/signin"); // Redirect to sign-in page if no token is found
+    }
+  }, [navigate]);
+
   return (
     <>
       <nav className="fixed top-0 z-40 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"></nav>
@@ -17,8 +28,7 @@ export default function Layout() {
       </aside>
 
       <div className="p-4 sm:ml-64">
-        <div className="p-4 pl-28 h-screen w-full DashboardSection  mt-14">
-          {/* <Dashboard /> */}
+        <div className="p-4 pl-28 h-screen w-full DashboardSection mt-14">
           <DashBoard />
         </div>
       </div>

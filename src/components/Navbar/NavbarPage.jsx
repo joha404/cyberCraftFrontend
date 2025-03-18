@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-
 import femaleUser from "../../assets/images/users/female.png";
 import "../Navbar.css";
+import { useNavigate } from "react-router-dom"; // To redirect to login page after logout
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  const handleLogout = () => {
+    // Perform logout actions, e.g., remove token from localStorage
+    localStorage.removeItem("authToken"); // Example: removing the auth token
+    navigate("/logout"); // Redirect to the login page
+  };
 
   return (
     <nav className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
@@ -13,7 +21,7 @@ export default function Navbar() {
           {/* Logo */}
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center  space-x-6 flex-grow justify-end">
+          <div className="hidden md:flex items-center space-x-6 flex-grow justify-end">
             <form className="relative SearchForm">
               <input
                 type="text"
@@ -34,22 +42,35 @@ export default function Navbar() {
                 2
               </sup>
             </a>
-            <div className="hidden md:flex items-center ">
+            <div className="hidden md:flex items-center relative">
               <div className="NavText mx-2">
                 <p>Hello World</p>
                 <span>Admin</span>
               </div>
-              <a href="#" className="flex items-center mx-1">
+              <a
+                href="#"
+                className="flex items-center mx-1"
+                onClick={() => setShowDropdown(!showDropdown)} // Toggle dropdown
+              >
                 <img
                   src={femaleUser}
                   alt="User"
                   className="h-10 w-10 rounded-full"
                 />
               </a>
+              {/* Dropdown Menu */}
+              {showDropdown && (
+                <div className="absolute top-14 right-0 bg-white shadow-lg rounded-md w-[150px] py-2 mt-2">
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                    onClick={handleLogout} // Logout handler
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-
-          {/* User Section */}
 
           {/* Mobile Menu Button */}
           <button

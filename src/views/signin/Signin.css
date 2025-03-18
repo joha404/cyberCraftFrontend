@@ -17,7 +17,7 @@ label {
   letter-spacing: 0%;
   color: #345485;
 }
-.submitBtn {
+.submitBtnl {
   width: 353px !important;
   height: 56px;
   background-color: #345485;
@@ -34,7 +34,7 @@ label {
   gap: 10px;
   cursor: pointer;
 }
-.submitBtn:hover {
+.submitBtnl:hover {
   background-color: #1c3c6c;
 }
 input:focus,
