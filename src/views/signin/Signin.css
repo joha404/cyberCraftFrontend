@@ -1,0 +1,113 @@
+.signUp {
+  background: linear-gradient(to top left, #eff1f02b 7%, #c2dafff5 96%);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border-radius: 8px;
+}
+.leftSection p {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0%;
+}
+label {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  letter-spacing: 0%;
+  color: #345485;
+}
+.submitBtn {
+  width: 353px !important;
+  height: 56px;
+  background-color: #345485;
+  color: #fff;
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+.submitBtn:hover {
+  background-color: #1c3c6c;
+}
+input:focus,
+textarea:focus {
+  outline: 3px solid #98999b;
+}
+input::placeholder,
+textarea::placeholder {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: 0%;
+  color: #00000080;
+}
+.signUpBottom {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 125%;
+  letter-spacing: 0%;
+  color: #000000b2;
+}
+.login {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  letter-spacing: 0%;
+  color: #000000b2;
+}
+.login a {
+  font-family: "Inter", sans-serif;
+  color: #345485;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+}
+#checkbox {
+}
+/* Style the checkbox to make it circular */
+.circle-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Add a checkmark when the checkbox is checked */
+.circle-checkbox:checked {
+  background-color: #345485;
+}
+
+/* Add a checkmark symbol */
+.circle-checkbox:checked::after {
+  content: "✔";
+  color: #fff !important; /* Change color to white */
+  font-size: 12px; /* Smaller font size */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.checkboxLabel,
+.forgot {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  color: #345485;
+}

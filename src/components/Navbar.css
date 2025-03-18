@@ -1,0 +1,36 @@
+#bellIcon {
+  font-size: 24px;
+  color: #607fad;
+}
+
+.NavText p {
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+}
+.NavText span {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #565656;
+}
+.SearchForm {
+  width: 625px !important;
+  height: 32px;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-right: 13px;
+  padding-bottom: 3px;
+  padding-left: 13px;
+  background-color: #0000000d;
+}
+#searchInput {
+  width: 625px !important;
+}
+#searchInput:focus {
+  outline: none !important;
+}

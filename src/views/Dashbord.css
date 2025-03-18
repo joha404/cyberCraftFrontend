@@ -1,0 +1,108 @@
+.dashboardNavLeft h1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 46px;
+  letter-spacing: 0px;
+}
+.DashboardTable {
+  box-shadow: #0000000d 0px 5px 15px;
+  border-radius: 14px;
+}
+.share,
+.plus,
+.download,
+.menu,
+.repeat {
+  padding: 4px;
+  border-radius: 4px;
+  height: 48px;
+  width: 48px;
+  border: 2px solid #607fad;
+}
+
+.share:hover,
+.plus:hover,
+.download:hover,
+.repeat:hover,
+.menu:hover {
+  border: 2px solid #0044a9;
+}
+.DashboardTableSide {
+  width: 390px;
+  float: right;
+}
+.SearchFormDashboard {
+  width: 295px !important;
+  height: 48px !important;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-right: 13px;
+  padding-bottom: 3px;
+  padding-left: 13px;
+  border: 2px solid #898b8d;
+}
+#searchInputDashbord {
+  width: 295px !important;
+  height: 48px;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-right: 13px;
+  padding-bottom: 3px;
+  padding-left: 13px;
+  border: 2px solid #898b8d;
+}
+.fa-magnifying-glass {
+  font-size: 18px;
+}
+#searchInput:focus {
+  outline: none !important;
+}
+
+.IconAction1 {
+  height: 32px;
+  width: 32px;
+  background-color: #f3f6fb;
+  color: #8aa8d4;
+  cursor: pointer;
+}
+.IconAction2 {
+  height: 32px;
+  width: 32px;
+  color: #6bc25f;
+  background-color: #edf8ec;
+  cursor: pointer;
+}
+.IconAction3 {
+  height: 32px;
+  width: 32px;
+  color: #fb8585;
+  background-color: #fff0f0;
+  cursor: pointer;
+}
+.IconAction1:hover {
+  background-color: #e2e7f0;
+}
+.IconAction2:hover {
+  background-color: #e3f8e1;
+}
+.IconAction3:hover {
+  background-color: #eddfdf;
+}
+thead tr th {
+  color: #111111;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+tbody tr td {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+
+  color: #606060;
+}

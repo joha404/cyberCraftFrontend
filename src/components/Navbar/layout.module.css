@@ -1,0 +1,29 @@
+.sidenav {
+  width: 520px !important;
+  height: auto;
+  position: fixed;
+  left: 20px;
+}
+.container {
+  z-index: 1;
+}
+.main {
+  height: auto;
+  width: 100%;
+  background-color: #fff;
+  margin-left: 100px;
+  padding: 20px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  height: 600px;
+  background-color: #920b0b;
+  z-index: 999;
+}
+
+.content {
+  margin-top: 50px;
+  margin-left: 250px;
+}
