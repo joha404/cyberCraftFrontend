@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import Signin from "./views/signin/Signin";
 import Signup from "./views/signup/Signup";
 import Contact from "./views/contact/Contact";
+import Message from "./views/message/Message";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Contact />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/message" element={<Message />} />
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Router>

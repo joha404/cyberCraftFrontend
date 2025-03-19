@@ -160,6 +160,36 @@ export default function Dashboard() {
     // Save the generated PDF
     doc.save("employee_details.pdf");
   };
+  const generateSingleEmployeePDF = (employee) => {
+    const doc = new jsPDF();
+
+    // Set Title
+    doc.setFontSize(18);
+    doc.text("Employee Details", 14, 20);
+
+    // Employee details
+    const employeeDetails = [
+      ["ID:", employee.dbId],
+      ["Employee ID:", employee.employeId],
+      ["Name:", employee.name],
+      ["Email:", employee.email],
+      ["Department:", employee.department],
+      ["Designation:", employee.designation],
+    ];
+
+    // Set initial position for details
+    let yPos = 30;
+    doc.setFontSize(12);
+
+    employeeDetails.forEach((detail) => {
+      doc.text(`${detail[0]} ${detail[1]}`, 14, yPos);
+      yPos += 10;
+    });
+
+    // Save the generated PDF
+    doc.save(`employee_${employee.employeId}.pdf`);
+  };
+
   return (
     <div className="container">
       <div className="flex justify-between items-center p-4 pr-5">
@@ -173,7 +203,10 @@ export default function Dashboard() {
           <div className="menu flex justify-center items-center cursor-pointer">
             <img src={menuIcon} alt="Menu Icon" />
           </div>
-          <div className="download flex justify-center items-center cursor-pointer">
+          <div
+            className="download flex justify-center items-center cursor-pointer"
+            onClick={employeegeneratePDF}
+          >
             <img src={downloadIcon} alt="Download Icon" />
           </div>
           <div
@@ -203,7 +236,11 @@ export default function Dashboard() {
           </form>
 
           <div className="repeat flex justify-center items-center cursor-pointer">
-            <img src={repeatIcon} alt="Repeat Icon" />
+            <img
+              src={repeatIcon}
+              onClick={() => window.location.reload()}
+              alt="Repeat Icon"
+            />
           </div>
         </div>
 
@@ -240,7 +277,7 @@ export default function Dashboard() {
                     <td className="px-4 py-2">
                       <button
                         className="px-1 py-1 text-sm rounded-md"
-                        onClick={employeegeneratePDF}
+                        onClick={() => generateSingleEmployeePDF(employee)}
                       >
                         <div className="IconAction1 rounded-full flex justify-center items-center">
                           <i className="fa-solid fa-arrow-up-from-bracket"></i>

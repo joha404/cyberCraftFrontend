@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import femaleUser from "../../assets/images/users/female.png";
 import "../Navbar.css";
-import { useNavigate } from "react-router-dom"; // To redirect to login page after logout
+import { useNavigate, Link } from "react-router-dom"; // To redirect to login page after logout
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,13 +42,17 @@ export default function Navbar() {
                 2
               </sup>
             </a>
+            <Link to="/message">
+              {" "}
+              <p>Message</p>{" "}
+            </Link>
             <div className="hidden md:flex items-center relative">
               <div className="NavText mx-2">
                 <p>Hello World</p>
                 <span>Admin</span>
               </div>
               <a
-                href="#"
+                href=""
                 className="flex items-center mx-1"
                 onClick={() => setShowDropdown(!showDropdown)} // Toggle dropdown
               >
