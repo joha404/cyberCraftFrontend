@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import contectLogo from "../../assets/images/logo/c.png";
 import bannerImg from "../../assets/images/banner/ba.png";
 import "./Contact.css";
-
+import Swal from "sweetalert2";
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,31 +15,75 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // 📄 Generate PDF
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Contact Form Submission", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Name: ${name || "N/A"}`, 20, 40); // Ensure name is not empty
+    doc.text(`Email: ${email || "N/A"}`, 20, 50); // Ensure email is not empty
+
+    doc.text("Message:", 20, 60);
+
+    if (message.trim() === "") {
+      doc.text("No message provided.", 20, 70);
+    } else {
+      const splitMessage = doc.splitTextToSize(message, 170);
+      doc.text(splitMessage, 20, 70);
+    }
+
+    // Generate Blob
+    const pdfBlob = doc.output("blob");
+
+    return pdfBlob;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form fields before submitting
     if (!name || !email || !message) {
       setError("All fields are required.");
       return;
     }
 
-    // Clear previous errors and start loading
     setError("");
     setLoading(true);
 
     try {
+      const pdfBlob = generatePDF();
+
+      // Convert Blob to File
+      const pdfFile = new File([pdfBlob], "contact_form.pdf", {
+        type: "application/pdf",
+      });
+
+      const formData = new FormData();
+      formData.append("pdf", pdfFile); // Append as a File
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("message", message);
+
       const response = await axios.post(
-        "https://cyber-craft-backend.vercel.app/message/create",
+        "http://localhost:3000/message/send-email",
+        formData,
         {
-          name,
-          email,
-          message,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
-      // On successful submission, redirect to the signup page
-      navigate("/signup");
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Message Sent Successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/signup");
+      }
     } catch (err) {
       setError("Error submitting message. Please try again.");
     } finally {
@@ -53,7 +99,7 @@ export default function Contact() {
             <img src={contectLogo} alt="logo" className="contactLogo" />
             <p className="welcomeMessage font-inter text-[#353535] mt-4 font-normal w-[428px] text-[20px] leading-[100%] tracking-[0%]">
               Welcome back to CyberCraft Bangladesh, where your creativity
-              thrives
+              thrives.
             </p>
 
             <div className="contectForm">
@@ -66,8 +112,7 @@ export default function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your Full Name"
-                    id="inputName"
-                    className="bg-white w-[487px] h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px] gap-[10px] mt-1"
+                    className="input-field"
                   />
                 </div>
 
@@ -78,8 +123,8 @@ export default function Contact() {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="example2@gmail.com"
-                    className="mt-1 bg-white w-[487px] h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px] gap-[10px]"
+                    placeholder="example@gmail.com"
+                    className="input-field"
                   />
                 </div>
 
@@ -90,13 +135,11 @@ export default function Contact() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Write your message"
-                    className="mt-1 bg-white w-[487px] h-[139px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px] gap-[10px]"
+                    className="input-field"
                   ></textarea>
                 </div>
 
-                {error && (
-                  <p className="text-red-500 mt-2">{error}</p> // Display error if any
-                )}
+                {error && <p className="text-red-500 mt-2">{error}</p>}
 
                 <div className="mt-2">
                   <button
@@ -111,7 +154,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="">
+          <div>
             <img src={bannerImg} alt="Banner" className="w-full h-full" />
           </div>
         </div>
