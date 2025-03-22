@@ -112,7 +112,7 @@ export default function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your Full Name"
-                    className="input-field"
+                    className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px]"
                   />
                 </div>
 
@@ -124,7 +124,7 @@ export default function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="example@gmail.com"
-                    className="input-field"
+                    className="mt-1 bg-white w-full h-[56px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px]"
                   />
                 </div>
 
@@ -135,7 +135,7 @@ export default function Contact() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Write your message"
-                    className="input-field"
+                    className="mt-1 bg-white w-full h-[136px] outline outline-1 outline-[#d8dadc] border-none rounded-[10px] px-4 py-[18px]"
                   ></textarea>
                 </div>
 
